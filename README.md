@@ -1,2 +1,2 @@
 # About this repo
-This repo holds all of the coding things I'm learning
+This repo will hold all of the projects and exercises I've accumulated so far.
