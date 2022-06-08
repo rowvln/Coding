@@ -40,7 +40,7 @@ def pivot(array, start, end):
     (array[swapIndex + 1], array[end]) = (array[end], array[swapIndex + 1])
     return swapIndex + 1
 
-# TC: O(nlogn) BEST, O(n^2) WORSE || SC: O(1)
+# TC: O(nlogn) BEST, O(n^2) WORSE || SC: O(logn)
 def quickSort(array, left, right):
     if left < right:
         pivotIndex = pivot(array, left, right)
