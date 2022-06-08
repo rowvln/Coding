@@ -20,12 +20,8 @@ def mergeSort(array):
         mergeSort(left)
         mergeSort(right)
 
-        # iterates through the two halves
-        i = 0
-        j = 0
-
-        # iterator for the main list
-        k = 0
+        # i and j iterates through the two halves, k is the iterator for the main list
+        i, j, k = 0, 0, 0 # or i = j = k = 0
 
         while i < len(left) and j < len(right):
             if left[i] < right[j]:
