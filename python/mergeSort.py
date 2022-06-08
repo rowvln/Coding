@@ -9,7 +9,7 @@ def generateRandom():
 
     return mylist
 
-# TC: O(nlogn) || SC: O(1)
+# TC: O(nlogn) || SC: O(n)
 def mergeSort(array):
     if len(array) > 1:
         mid = len(array) // 2
