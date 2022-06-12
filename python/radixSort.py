@@ -1,4 +1,10 @@
-<<<<<<< HEAD
+# Radix Sort - TC: || SC:
+# Raxdix sort is a special sorting algorithm that ONLY works on lists of numbers
+# It never makes comparisons between elements!
+# It exploits the fact that information about the size of a number is encoded in the number of digits
+# More digits means a bigger number!
+# Sorts by putting numbers in different buckets starting from the rightmost number and moving to the leftmost side. 
+# After each sort, put them together then move index to to the right
 import math
 
 def getDigit(num, i):
@@ -13,27 +19,13 @@ def mostDigits(nums):
     maxDigits = 0
     for i in range(len(nums)):
         maxDigits = max(maxDigits, digitCount(nums[i]))
-
-print(getDigit(10,2)) # returns 0
-print(digitCount(7234)) # returns 4
+    return maxDigits
 
 def radixSort(nums):
     maxDigitCount = mostDigits(nums)
-    while k < maxDigitCount:
-        digitBuckets = 
-=======
-# Generates list of random numbers
-# import random
-# def generateRandom(): 
-#     mylist = []
-
-#     for i in range(0,10000):
-#         x = random.randint(1,1000)
-#         mylist.append(x)
-
-#     return mylist
-
-# TC: O(nlogn) || SC: O(1)
-def radixSort(array):
-    return array
->>>>>>> 06cb013a5e121e3665a25d7fde3f89822ad4cc77
+    for k in range(maxDigitCount):
+        digitBuckets = []
+        for i in range(len(nums) - 1):
+            digitBuckets[getDigit(nums[i], k)].push("hello")
+    print(range(len(nums) - 1))
+print(radixSort([23,345,5367,12,2345,9852]))     
