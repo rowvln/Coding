@@ -120,7 +120,39 @@ class SinglyLinkedList:
         self.length += 1
         return self
 
-        
+    # Singly LinkedList - GET method
+    # Retrieves a node by its position in the Linked List
+    # This function should accept an index
+    # If the index is less than zero or greater than or equal to the length of the list, return None
+    # Loop through the list until you reach the index and return the node at that specific index
+    def get(self,index):
+        # if the index is less than zero or greater than or equal to the length of the list, return None
+        if index < 0 or index >= self.length:
+            return None
+        # set count equal to 0. set current to head
+        count = 0
+        current = self.head
+        # traverses through the linked list to find the index
+        while count != index:
+            # sets current to the next node
+            current = current.next 
+            # increases count by 1 until it reaches the index or n-1 length
+            count+= 1
+        # returns current node
+        return current
+
+    # Singly LinkedList - SET method
+    def set(self, index, data):
+        foundNode = self.get(index)
+        if foundNode:
+            foundNode.data = data
+            return True
+        else:
+            return False
+
+    # Singly LinkedList - INSERT method
+    # Singly LinkedList - REMOVE method
+    # Singly LinkedList - REVERSE method
 
 aList = SinglyLinkedList()
 
@@ -135,4 +167,6 @@ aList.shift() # Tests removing element at beginning.
 print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints GOODBYE
 aList.unshift("AYO") # Tests adding element at beginning.
 print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints AYO
+aList.set(0, "YERP")
+print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints YERP
 
