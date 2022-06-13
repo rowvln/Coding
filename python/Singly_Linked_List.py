@@ -78,13 +78,61 @@ class SinglyLinkedList:
 
         # returns current node
         return current
+    
+    # Singly LinkedList - SHIFT method
+    # Removes a new node from the beginning of a Linked List
+    # If there are no nodes, return undefined
+    # Store the current head property in a variable 
+    # Set the head property to the current head’s next property
+    # Decrement the length by 1
+    # Return the value of the node removed
+    def shift(self):
+        # if there are no nodes, return undefined
+        if not self.head:
+            return None
+        # store current head in a variable
+        currentHead = self.head
+        # sets new head equal to the next element
+        self.head = currentHead.next
+        self.length -= 1
+        # if you've popped all of the nodes in the list, reset TAIL to None
+        if self.length == 0:
+            self.tail == None
+        # returns the element that was removed
+        return currentHead
+
+    # Singly LinkedList - UNSHIFT method
+    # Adds a new node from the beginning of a Linked List
+    # This function should accept a Value
+    # Create a new node using the value passed to the function
+    # If there is no head property on the list, set the head and tail to be the newly created node
+    # Otherwise set the next property on the new node’s head to be the current head and set the head property on the list to be the newly created node
+    # Increment the length by one
+    # Return the Linked List
+    def unshift(self, data):
+        newNode = Node(data)
+        if not self.head:
+            self.head = newNode
+            self.tail = self.head
+        else:
+            newNode.next = self.head
+            self.head = newNode
+        self.length += 1
+        return self
+
         
 
 aList = SinglyLinkedList()
+
 aList.push("HELLO")
 aList.push("GOODBYE")
 aList.push("!")
-aList.pop()
-# print(aList.length)
-# print("2 " + str(aList.length))
+
+print("Initial Length " + str(aList.length) + " " + str(aList.head.data))
+aList.pop() # Tests popping element at end.
+print("New Length " + str(aList.length) + " " + str(aList.head.data)) # PRINTS Hello
+aList.shift() # Tests removing element at beginning.
+print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints GOODBYE
+aList.unshift("AYO") # Tests adding element at beginning.
+print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints AYO
 
