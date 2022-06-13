@@ -148,17 +148,122 @@ class SinglyLinkedList:
     # If the node is not found, return false
     # If the node is found, set the value of that node to be the value passed to the function and return true
     def set(self, index, data):
+        # checks to see if we can find the node
         foundNode = self.get(index)
+        # if we can, then set current data to new data passed. return True
         if foundNode:
             foundNode.data = data
             return True
+        # otherwise return False
         else:
             return False
 
     # Singly LinkedList - INSERT method
-    # Singly LinkedList - REMOVE method
-    # Singly LinkedList - REVERSE method
+    # Adding a node to the Linked List at a specific position
+    # If the index is less than zero or greater than the length, return false
+    # If the index is the same as the length, push a new node to the end of the list
+    # If the index is 0, unshift a new node to the start of the list
+    # Otherwise, using the get method, access the node at the index - 1
+    # Set the next property on that node to be the new node
+    # Set the next property on the new node to be the previous next
+    # Increment the length
+    # Return true
+    def insert(self, index, data):
+        # If the index is less than zero or greater than the length, return false
+        if index < 0 or index > self.length:
+            return False
+        # If the index is the same as the length, push a new node to the end of the list
+        if index == self.length:
+            self.push(data)
+            return True
+            # return not not self.push(data) <-- utilizes double negation to return the truth value of whether or not the push worked. instead of pushing first then returning True
+        # If the index is 0, unshift a new node to the start of the list
+        if index == 0:
+            self.unshift(data)
+            return True
+            # return not not self.unshift(data) <-- utilizes double negation to return the truth value of whether or not unshift worked. instead of unshifting first then returning True
+        # sets newNode equal to new node with data
+        newNode = Node(data)
+        # prev is the node at index - 1 length
+        prev = self.get(index - 1)
+        # temp holds the value of the previous next data
+        temp = prev.next
+        # sets the next data of the previous node to newNode
+        prev.next = newNode
+        # sets newNode's next data to the data of the previous node's next value
+        newNode.next = temp
+        # increase length by 1
+        self.length += 1
+        # return true
+        return True
 
+    # Singly LinkedList - REMOVE method
+    # Removing a node from the Linked List at a specific position
+    # If the index is less than zero or greater than the length, return None
+    # If the index is the same as the length - 1, use pop method
+    # If the index is 0, use shift method
+    # Otherwise, using the get method, access the node at the index - 1
+    # Set the next property on that node to be the next of the next node
+    # Decrement the length
+    # Return the value of the node removed
+    def remove(self,index):
+        # If the index is less than zero or equal to or greater than the length, return None
+        if index < 0 or index >= self.length:
+            return None
+        # If the index is equal to 0, use shift method
+        if index == 0:
+            return self.shift()
+        # If the index is equal to length - 1, then use pop method
+        if index == self.length - 1:
+            return self.pop()
+        # previousNode is the node at index - 1 length 
+        previousNode = self.get(index - 1)
+        # removes holds the value of the previous node's next data
+        removed = previousNode.next
+        # previousNode's next data is set to removed's next data
+        previousNode.next = removed.next
+        # decrement length by 1
+        self.length -= 1
+        # returns removed node
+        return removed
+
+    # Singly LinkedList - REVERSE method
+    # Reversing the Linked List in place
+    # Swap the head and the tail
+    # Create a variable called next
+    # Create a variable called prev
+    # Create a variable called node and initialize it to the head property
+    # Loop through the list
+    # Set next to be the next property of on whatever node is
+    # Sery the next property of the node to be whatever prev is
+    # Set prev to be the value of the node variable
+    # Set node variable to be the value of the next variable
+    def reverse(self):
+        # set initial count to 0 for list traversal
+        count = 0
+        # node is set to the current head
+        node = self.head
+        # swaps current head with current tail data
+        self.head = self.tail
+        self.tail = node
+        # sets previous and next node to None
+        nextNode, prevnode = None, None
+        # traverses through the list from left to right
+        while count != self.length:
+            # sets nextNode equal to the data at the current node's next method
+            nextNode = node.next
+            # sets current node's next data to previous node
+            node.next = prevnode
+            # sets previous node to the old head
+            prevnode = node
+            # sets node to the next node
+            node = nextNode
+            # increment count by 1
+            count += 1
+        # returns the reversed LinkedList
+        return self
+
+# TESTING CASES HERE FOR ALL THE METHODS FOUND ABOVE
 aList = SinglyLinkedList()
 
 aList.push("HELLO")
@@ -174,4 +279,11 @@ aList.unshift("AYO") # Tests adding element at beginning.
 print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints AYO
 aList.set(0, "YERP")
 print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints YERP
+aList.insert(0, "YAGAH")
+print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints YAGAH
+aList.remove(0)
+print("New Length " + str(aList.length) + " " + str(aList.head.data)) # Prints YERP
+print("Testing reverse method. here is the current length, head, and tail: " + str(aList.length) + " " + str(aList.head.data) + " & " + str(aList.tail.data)) # Prints 2 YERP & GOODBYE
+aList.reverse()
+print("Reversed LinkedList with length, head, and tail: " + str(aList.length) + " " + str(aList.head.data) + " & " + str(aList.tail.data)) # Prints 2 GOODBYE & YERP
 
