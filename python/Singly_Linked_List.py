@@ -33,7 +33,7 @@ class SinglyLinkedList:
     def push(self, data):
         newNode = Node(data)
         # if there is no head in the linked list, set head to the new node and tail to the same head ex. NEW EMPTY LIST: HEAD[]TAIL -> pushing in [1] -> NEW LIST IS NOW: HEAD/TAIL[1]
-        if(not self.head):
+        if not self.head:
             self.head = newNode
             self.tail = self.head
         # sets current tail to newNode and points tail.next to the newNode ex. LINKED LIST: HEAD[1]-->[2]-->[3]-->[4]TAIL -> pushing in [10] -> LINKED LIST IS NOW: HEAD[1]-->[2]-->[3]-->[4]-->[5]TAIL
