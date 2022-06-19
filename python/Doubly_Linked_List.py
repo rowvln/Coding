@@ -2,6 +2,9 @@
 # A doubly linked list is a type of linked list that is bidirectional, that is, it can be traversed in both directions from head to the last node (tail). 
 # Each element in a linked list is called a node. 
 # A single node contains data, a pointer to the next node, and a node pointer to the previous node which helps in maintaining the structure of the list.
+from operator import truediv
+
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -119,3 +122,107 @@ class DoublyLinkedList:
         length += 1
         # return the list
         return self
+
+    # Get Method
+    # If the index is less than 0 or greate or equal to the length, return None
+    # If the index is less than or equal to half the length of the list:
+    # Loop through the list starting from the head and loop towards the middle
+    # Return the node once its found
+    # If the index is greater than half the length of the list
+    # Loop through the list starting from the tail and loop towards the middle
+    # Return the node once its found
+    #
+    # Brute Force Solution
+    # def get(self, index):
+    #     if index < 0 or index >= self.length:
+    #         return None
+    #     count = 0
+    #     current = self.head
+    #     while count != index:
+    #         current = current.next
+    #         count += 1
+    #     return current
+    # This solution assesses whether we are trying to find the element in the first or second half of the list and runs accordingly by either increasing count or decreasing count depending on where you start
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        if index <= self.length/2:
+            count = 0
+            current = self.head
+            while count != index:
+                current = current.next
+                count += 1
+        else:
+            count = self.length - 1
+            current = self.tail
+            while count != index:
+                current = current.prev
+                count -= 1
+        return current
+
+    # Set Method
+    # Replacing the value of a node in the Doubly Linked List
+    # Create a variable which is the result of the get method at the index passed to the function
+    # If the get method is a valid node, set the value of that node to be  the value passed to the function
+    # Return True
+    # Otherwise, return false
+    def set(self, index, data):
+        foundNode = self.get(index)
+        if foundNode != None:
+            foundNode.data = data
+            return True
+        return False
+
+    # Insert Method
+    # Adding a node in a Doubly Linked List by a certain position
+    # If the index is less than zero or greater than or equal to the length, return false
+    # If the index is 0, unshift
+    # If the index is the same as the length, push
+    # Use the get method to access the index-1
+    # Set the next and preve properties on the correct nodes to link everything together
+    # Increment the length
+    # Return true
+    def insert(self,index, data):
+        if index < 0 or index > self.length:
+            return False
+        if index == 0:
+            return self.unshift(data)
+        if index == self.length:
+            return self.push(data)
+
+        newNode = Node(data)
+        beforeNode = self.get(index - 1)
+        afterNode = beforeNode.next
+        
+        beforeNode.next = newNode
+        newNode.prev = beforeNode
+        afterNode.prev = newNode
+        self.length += 1
+        return True  
+
+    # Remove Method
+    # Removing a node in a Doubly Linked List by a certain position
+    # If the index is less than zero or greater than or equal to the length, return None
+    # If the index is 0, shift
+    # If the index is the same as index - 1, pop
+    # Use the get method to retrieve the item to be removed
+    # Update the next and prev properties to remove the found node from the list
+    # Set next and prev to None on the found node
+    # Decrement the length
+    # Return the removed node
+    def remove(self, index):
+        if index < 0 or index >= self.length:
+            return False
+        if index == 0:
+            return self.shift
+        if index == self.length:
+            return self.pop
+        removedNode = self.get(index)
+        beforeNode = removedNode.prev
+        afterNode = removedNode.next
+        beforeNode.next = afterNode
+        afterNode.prev = beforeNode
+        removedNode.next = None
+        removedNode.prev = None
+        self.length -= 1
+        return removedNode
