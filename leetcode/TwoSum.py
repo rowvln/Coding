@@ -10,6 +10,7 @@
 # Define a function that takes in two arguments: a list of numbers and a target value. Return the indices of the two numbers that add up to that value if any.
 
 # brute force solution using Two-Pointer method
+# TC: O(n^2) | SC: O(n)
 def twoSum(nums, target):
     # go through the array and check to see if there are two numbers that add up to target. if there is a pair, return its indices, otherwise return None.
     for i in range(len(nums)):
