@@ -1,6 +1,3 @@
-from logging import root
-
-
 class Node:
     def __init__(this, data):
         this.data = data
@@ -11,6 +8,7 @@ class BinarySearchTree:
     def __init__(this):
         this.root = None
 
+<<<<<<< HEAD
     def insert(self, data):
         newNode = Node(data)
         if self.root == None:
@@ -33,6 +31,30 @@ class BinarySearchTree:
                         current = current.right
 
 
+=======
+# def find(self, value):
+#     if self.root == None:
+#         return False
+#     current = self.root
+#     found = False
+#     while(current and not found):
+        
+def bfs(self):
+    data = []
+    queue = []
+    node = self.root
+
+    queue.push(node)
+
+    while len(queue):
+        node = queue.shift()
+        data.push(node)
+        if node.left:
+            queue.push(node.left)
+        if node.right:
+            queue.push(node.right)
+    return data
+>>>>>>> f195e03e4b7be461438c7ecd0d00dfcf42ba16ae
 
 tree = BinarySearchTree()
 tree.root = Node(10)
