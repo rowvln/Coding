@@ -1,6 +1,3 @@
-from logging import root
-
-
 class Node:
     def __init__(this, data):
         this.data = data
@@ -46,35 +43,91 @@ class BinarySearchTree:
                     else:
                         current = current.right
 
-def find(self, data):
-    # checks to see if there is a root. if there isn't then return False
-    if self.root == None:
-        return False
-    # if there is a root then check if the data of the new node is the value we're looking for.
-    current = self.root
-    # set found intially to False to make it easier to return False if we can't find the data
-    found = False
-    # if it isn't then check to see if the data is greater than or less than the value of the root
+    def find(self, data):
+        # checks to see if there is a root. if there isn't then return False
+        if self.root == None:
+            return False
+        # sets current to the root
+        current = self.root
+        # set found intially to False to make it easier to return False if we can't find the data
+        found = False
+        # if there is a root then check if the data of the new node is the value we're looking for.
+        while current and not found:
+            # if it isn't then check to see if the data is greater than or less than the value of the root
+            # if it's greater, then check to see if there's a node to the right
+            if data > current.data:
+                current = current.right
+            # if it's less, then check to see if there is a node to the left
+            elif data < current.data:
+                current = current.left
+            else:
+                found = True
+        if not found:
+            return None
+        return current
 
-    # if it's greater, then check to see if there's a node to the right
+    def BFS(self):
+        # creates an array of nodes we already visited
+        visited = []
+        # creates a queue of nodes to be visited like a normal queue
+        queue = []
+        # set node to the root node
+        node = self.root
+        # push the root node to the queue
+        queue.push(node)
+        # while there is anything in the queue
+        while len(queue):
+            # removes the node at the beginning
+            node = queue.shift()
+            # adds the node to the visited array
+            visited.push(node.data)
+            # if the node has a left node, push the node into the queue
+            if node.left:
+                queue.push(node.left)
+                # if the node has  right node, push the node into the queue
+            if node.right:
+                queue.push(node.right)
+        # returns all the nodes we visited
+        return visited
+    
+    def DFSPreOrder(self):
+        data = []
+        current = self.root
 
-    # if it's less, then check to see if there is a node to the left
-        
-def bfs(self):
-    data = []
-    queue = []
-    node = self.root
+        def traverse(node):
+            data.append(node.data)
+            if node.left:
+                traverse(node.left)
+            if node.right:
+                traverse(node.right)
+        traverse(self.root)
+        return data
+    
+    def DFSPostOrder(self):
+        data = []
+        current = self.root
 
-    queue.push(node)
+        def traverse(node):
+            if node.left:
+                traverse(node.left)
+            if node.right:
+                traverse(node.right)
+            data.append(node.data)
+        traverse(self.root)
+        return data
 
-    while len(queue):
-        node = queue.shift()
-        data.push(node)
-        if node.left:
-            queue.push(node.left)
-        if node.right:
-            queue.push(node.right)
-    return data
+    def DFSInOrder(self):
+        data = []
+        current = self.root
+
+        def traverse(node):
+            if node.left:
+                traverse(node.left)
+            data.append(node.data)
+            if node.right:
+                traverse(node.right)
+        traverse(self.root)
+        return data
 
 tree = BinarySearchTree()
 tree.insert(10)
@@ -89,5 +142,10 @@ tree.insert(7)
 # tree.root.right = Node(15)
 # tree.root.left = Node(7)
 # tree.root.left.right = Node(9)
+preorder = tree.DFSPreOrder()
+postorder = tree.DFSPostOrder()
+inorder = tree.DFSInOrder()
 
-print(tree.root.data)
+print(preorder)
+print(postorder)
+print(inorder)
